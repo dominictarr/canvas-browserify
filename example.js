@@ -1,10 +1,7 @@
-
 var Canvas = require('./')
 
 var dia = 200
-
 var canvas = new Canvas(dia, dia)
-
 var ctx = canvas.getContext('2d')
 
 var context = canvas.getContext('2d');
@@ -23,5 +20,5 @@ context.stroke();
 if(process.title == 'browser') {
   document.body.appendChild(canvas)
 } else {
-  canvas.pngStream().pipe(require('fs').createWriteStream('circle.png'))
+  canvas.pngStream().pipe(process.stdout)
 }
