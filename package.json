@@ -1,0 +1,20 @@
+{
+  "name": "canvas-browserify",
+  "description": "",
+  "version": "1.0.3",
+  "homepage": "https://github.com/dominictarr/canvas-browserify",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/dominictarr/canvas-browserify.git"
+  },
+  "dependencies": {
+    "canvas": "~1.0.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "set -e; for t in test/*.js; do node $t; done"
+  },
+  "browser": "browser.js",
+  "author": "Dominic Tarr <dominic.tarr@gmail.com> (http://dominictarr.com)",
+  "license": "MIT"
+}

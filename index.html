@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<body></body>
+<script language=javascript>
+;(function(e,t,n){function i(n,s){if(!t[n]){if(!e[n]){var o=typeof require=="function"&&require;if(!s&&o)return o(n,!0);if(r)return r(n,!0);throw new Error("Cannot find module '"+n+"'")}var u=t[n]={exports:{}};e[n][0].call(u.exports,function(t){var r=e[n][1][t];return i(r?r:t)},u,u.exports)}return t[n].exports}var r=typeof require=="function"&&require;for(var s=0;s<n.length;s++)i(n[s]);return i})({1:[function(require,module,exports){
+// nothing to see here... no file methods for the browser
+
+},{}],2:[function(require,module,exports){
+// shim for using process in browser
+
+var process = module.exports = {};
+
+process.nextTick = (function () {
+    var canSetImmediate = typeof window !== 'undefined'
+    && window.setImmediate;
+    var canPost = typeof window !== 'undefined'
+    && window.postMessage && window.addEventListener
+    ;
+
+    if (canSetImmediate) {
+        return function (f) { return window.setImmediate(f) };
+    }
+
+    if (canPost) {
+        var queue = [];
+        window.addEventListener('message', function (ev) {
+            if (ev.source === window && ev.data === 'process-tick') {
+                ev.stopPropagation();
+                if (queue.length > 0) {
+                    var fn = queue.shift();
+                    fn();
+                }
+            }
+        }, true);
+
+        return function nextTick(fn) {
+            queue.push(fn);
+            window.postMessage('process-tick', '*');
+        };
+    }
+
+    return function nextTick(fn) {
+        setTimeout(fn, 0);
+    };
+})();
+
+process.title = 'browser';
+process.browser = true;
+process.env = {};
+process.argv = [];
+
+process.binding = function (name) {
+    throw new Error('process.binding is not supported');
+}
+
+// TODO(shtylman)
+process.cwd = function () { return '/' };
+process.chdir = function (dir) {
+    throw new Error('process.chdir is not supported');
+};
+
+},{}],3:[function(require,module,exports){
+(function(process){
+var Canvas = require('./')
+
+var dia = 200
+
+var canvas = new Canvas(dia, dia)
+
+var ctx = canvas.getContext('2d')
+
+var context = canvas.getContext('2d');
+var centerX = canvas.width / 2;
+var centerY = canvas.height / 2;
+var radius = (dia - 5)/2;
+
+context.beginPath();
+context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+context.fillStyle = 'green';
+context.fill();
+context.lineWidth = 5;
+context.strokeStyle = '#003300';
+context.stroke();
+
+if(process.title == 'browser') {
+  document.body.appendChild(canvas)
+} else {
+  canvas.pngStream().pipe(require('fs').createWriteStream('circle.png'))
+}
+
+})(require("__browserify_process"))
+},{"fs":1,"./":4,"__browserify_process":2}],4:[function(require,module,exports){
+
+module.exports = function Canvas (w, h) {
+  var canvas = document.createElement('canvas')
+  canvas.width = w || 300
+  canvas.height = h || 150
+  return canvas
+}
+
+},{}]},{},[3])
+;</script>
+</html>
