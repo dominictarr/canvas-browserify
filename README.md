@@ -30,7 +30,7 @@ context.stroke();
 if(process.title == 'browser') {
   document.body.appendChild(canvas)
 } else {
-  canvas.pngStream().pipe(procoss.stdout)
+  canvas.pngStream().pipe(process.stdout)
 }
 ```
 
