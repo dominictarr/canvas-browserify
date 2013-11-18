@@ -1,7 +1,7 @@
 {
   "name": "canvas-browserify",
   "description": "wrap canvas module so the same code works in node or browser",
-  "version": "1.0.5",
+  "version": "1.1.0",
   "homepage": "https://github.com/dominictarr/canvas-browserify",
   "repository": {
     "type": "git",
