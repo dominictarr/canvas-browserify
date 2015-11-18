@@ -11,5 +11,9 @@ Canvas.Image = function () {
   return img
 }
 
-
-
+Canvas.ImageData = function () {
+  return new (Function.prototype.bind
+              .apply(ImageData, [null]
+                     .concat(Array.prototype.slice
+                             .call(arguments))))
+}
