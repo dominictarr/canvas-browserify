@@ -1,2 +1,1 @@
-
-module.exports = require('canvas')
+module.exports = require('canvas-prebuilt')
